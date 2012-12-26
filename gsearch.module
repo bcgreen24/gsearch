@@ -28,7 +28,8 @@ function gsearch_block_view($block_name = ''){
 			node_object_prepare($node); // Set some default values.
 			$node->uid = 1; // Or any id you wish
 			//Add standard body field
-			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent" queryParameterName="q_as">
+			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent"
+				queryParameterName="q_as">
 				</gcse:search>';
 			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
 			$node->body[$node->language][0]['format'] = 'php_code';
@@ -36,7 +37,10 @@ function gsearch_block_view($block_name = ''){
 			node_save($node); // After this call we'll get a nid
 			}
 		drupal_add_js('gsearch.js');
-		$content = '<gcse:searchbox-only  linktarget="http://www.motioncode.biz/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
+		$content = '<gcse:searchbox-only 
+			linktarget="http://www.motioncode.biz/gsearch_results"
+			queryParameterName="q_as">
+			</gcse:searchbox-only>';
 		$block = array (
 			'subject' => t('Site Search'),
 			'content' => $content,
