@@ -18,8 +18,9 @@ function gsearch_block_info(){
 function gsearch_block_view($block_name = ''){
 	if ($block_name = 'google_integration'){
 		//NOTE: drupal_valid_path is a D7 function; for D6, it would be node_valid_path
-		$item_exists = drupal_valid_path('gsearch_results');
-		if($item_exists == false){
+		$path = drupal_lookup_path('source', 'gsearch_results');
+		//$item_exists = drupal_valid_path('gsearch_results');
+		if(!$path){
 			$node = new stdClass(); // We create a new node object
 			$node->type = "page"; // Or any other content type you want
 			$node->title = "Search Results";
