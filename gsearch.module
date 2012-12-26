@@ -1,0 +1,49 @@
+<?php
+
+function gsearch_help($path, $arg){
+	if($path == 'admin/help#gsearch'){
+		return t('Google search integration.');
+	}
+}
+
+function gsearch_block_info(){
+	$blocks = array();
+	$blocks['google_integration'] = array(
+		'info' => t('Integration with Google search.'),
+		'cache' => DRUPAL_NO_CACHE,
+		);
+	return $blocks;
+}
+
+function gsearch_block_view($block_name = ''){
+	if ($block_name = 'google_integration'){
+		//NOTE: drupal_valid_path is a D7 function; for D6, it would be node_valid_path
+		$item_exists = drupal_valid_path('gsearch_results');
+		if($item_exists == false){
+			$node = new stdClass(); // We create a new node object
+			$node->type = "page"; // Or any other content type you want
+			$node->title = "Search Results";
+			$node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
+			$node->path = array('alias' => 'gsearch_results'); // Setting a node path
+			node_object_prepare($node); // Set some default values.
+			$node->uid = 1; // Or any id you wish
+			//Add standard body field
+			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent" queryParameterName="q_as">
+				</gcse:search>';
+			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
+			$node->body[$node->language][0]['format'] = 'php_code';
+			$node = node_submit($node); // Prepare node for a submit
+			node_save($node); // After this call we'll get a nid
+			}
+		drupal_add_js('gsearch.js');
+		$content = '<gcse:searchbox-only  linktarget="http://www.motioncode.biz/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
+		$block = array (
+			'subject' => t('Site Search'),
+			'content' => $content,
+			);
+		return $block;
+		
+
+		
+	}
+}
