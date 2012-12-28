@@ -32,17 +32,26 @@ function gsearch_block_view($block_name = ''){
 				queryParameterName="q_as">
 				</gcse:search>';
 			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
-			$node->body[$node->language][0]['format'] = 'php_code';
+			$node->body[$node->language][0]['format'] = 'PHP_code';
 			$node = node_submit($node); // Prepare node for a submit
 			node_save($node); // After this call we'll get a nid
 			}
-		drupal_add_js('gsearch.js');
-		$content = '<gcse:searchbox-only 
-			linktarget="http://www.motioncode.biz/gsearch_results"
-			queryParameterName="q_as">
-			</gcse:searchbox-only>';
+		//drupal_add_js('gsearch.js');
+		$content = <<<EOT
+		<script>
+		(function() {
+    		var cx = '017536680796664338934:35i1_gbk5hi';
+    		var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        	'//www.google.com/cse/cse.js?cx=' + cx;
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  		})();
+		</script>
+EOT;
+
+		$content .= '<gcse:searchbox-only linktarget="http://www.motioncode.biz/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
 		$block = array (
-			'content' => $content,
+			'content' => $content . 'Search Box Here',
 			);
 		return $block;
 		
