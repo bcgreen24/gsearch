@@ -24,15 +24,17 @@ function gsearch_block_view($block_name = ''){
 			$node->type = "page"; // Or any other content type you want
 			$node->title = "Search Results";
 			$node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
+			$node->body[$node->language][0]['format'] = 'PHP_code';
 			$node->path = array('alias' => 'gsearch_results'); // Setting a node path
 			node_object_prepare($node); // Set some default values.
 			$node->uid = 1; // Or any id you wish
 			//Add standard body field
+			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
 			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent"
 				queryParameterName="q_as">
 				</gcse:search>';
-			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
-			$node->body[$node->language][0]['format'] = 'PHP_code';
+			
+			
 			$node = node_submit($node); // Prepare node for a submit
 			node_save($node); // After this call we'll get a nid
 			}
