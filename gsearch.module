@@ -17,29 +17,24 @@ function gsearch_block_info(){
 
 function gsearch_block_view($block_name = ''){
 	if ($block_name = 'google_integration'){
-		//NOTE: drupal_valid_path is a D7 function; for D6, it would be node_valid_path
+		//NOTE: drupal_lookup_path is a D7 function; for D6, it would be node_valid_path
 		$path = drupal_lookup_path('source', 'gsearch_results');
 		if(!$path){
-			$node = new stdClass(); // We create a new node object
-			$node->type = "page"; // Or any other content type you want
+			$node = new stdClass(); 
+			$node->type = "page"; 
 			$node->title = "Search Results";
-			$node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
-			$node->uid = 1; // Or any id you wish
-			$node->body[$node->language][0]['format'] = 'php_code';
-			$node->path = array('alias' => 'gsearch_results'); // Setting a node path
-			node_object_prepare($node); // Set some default values.
-			
-			//Add standard body field
+			$node->language = LANGUAGE_NONE; 
+			$node->path = array('alias' => 'gsearch_results'); 
+			node_object_prepare($node); 
+			$node->uid = 1; 
+			$node->body[$node->language][0]['format'] = 'full_html';
 			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
 			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent"
 				queryParameterName="q_as">
 				</gcse:search>';
-			
-			
-			$node = node_submit($node); // Prepare node for a submit
-			node_save($node); // After this call we'll get a nid
+			$node = node_submit($node); 
+			node_save($node);
 			}
-		//drupal_add_js('gsearch.js');
 		$content = <<<EOT
 		<style>
 		table.gsc-search-box td{border:none;}
@@ -58,7 +53,7 @@ function gsearch_block_view($block_name = ''){
 		</script>
 EOT;
 
-		$content .= '<gcse:searchbox-only linktarget="http://bryit.campuscms.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
+		$content .= '<gcse:searchbox-only linktarget="http://bryit.campuscms.ucmerced.edu/search/node" queryParameterName="q_as"></gcse:searchbox-only>';
 		$block = array (
 			'content' => $content,
 			);
