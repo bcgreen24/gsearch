@@ -57,6 +57,7 @@ EOT;
 		$block = array (
 			'content' => $content,
 			);
+                //just a comment
 		return $block;
 		
 
