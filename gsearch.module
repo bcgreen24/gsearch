@@ -20,6 +20,7 @@ function gsearch_block_view($block_name = ''){
 		//NOTE: drupal_lookup_path is a D7 function; for D6, it would be node_valid_path
 		$path = drupal_lookup_path('source', 'gsearch_results');
 		if(!$path){
+                        //this create the search results page if it doesn't exist
 			$node = new stdClass(); 
 			$node->type = "page"; 
 			$node->title = "Search Results";
@@ -27,7 +28,7 @@ function gsearch_block_view($block_name = ''){
 			$node->path = array('alias' => 'gsearch_results'); 
 			node_object_prepare($node); 
 			$node->uid = 1; 
-			$node->body[$node->language][0]['format'] = 'full_html';
+			$node->body[$node->language][0]['format'] = 'php_code';
 			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
 			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent"
 				queryParameterName="q_as">
@@ -35,25 +36,24 @@ function gsearch_block_view($block_name = ''){
 			$node = node_submit($node); 
 			node_save($node);
 			}
+                //content that will be displayed in block (i.e., the search box)
 		$content = <<<EOT
-		<style>
-		table.gsc-search-box td{border:none;}
-		input.gsc-input{width:125px;}
-		div.region-header{margin-right:40px;}
-		div.block-gsearch{padding-right:40px;}
-		</style>
-		<script>
-		(function() {
-    		var cx = '017536680796664338934:u9geg4hbnhk';
-    		var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-    		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        	'//www.google.com/cse/cse.js?cx=' + cx;
-    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-  		})();
-		</script>
+    
+                <script>
+                (function() {
+                var cx = '017536680796664338934:5pfh-ddinpm';
+                var gcse = document.createElement('script'); gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                    '//www.google.com/cse/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+                })();
+                </script>
+                <gcse:search></gcse:search>
 EOT;
 
-		$content .= '<gcse:searchbox-only linktarget="http://bryit.campuscms.ucmerced.edu/search/node" queryParameterName="q_as"></gcse:searchbox-only>';
+		$content .= '<gcse:searchbox-only linktarget="/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
 		$block = array (
 			'content' => $content,
 			);
