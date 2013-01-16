@@ -53,7 +53,7 @@ function gsearch_block_view($block_name = ''){
                 <gcse:search></gcse:search>
 EOT;
 
-		$content .= '<gcse:searchbox-only linktarget="/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
+		$content .= '<gcse:searchbox-only linktarget="http://bryit.campuscms.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
 		$block = array (
 			'content' => $content,
 			);
