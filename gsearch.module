@@ -16,7 +16,7 @@ function gsearch_block_info(){
 }
 
 function gsearch_block_view($block_name = ''){
-	if ($block_name = 'google_integration'){
+	if ($block_name == 'google_integration'){
 		//NOTE: drupal_lookup_path is a D7 function; for D6, it would be node_valid_path
 		$path = drupal_lookup_path('source', 'gsearch_results');
 		if(!$path){
@@ -30,28 +30,39 @@ function gsearch_block_view($block_name = ''){
 			$node->uid = 1; 
 			$node->body[$node->language][0]['format'] = 'php_code';
 			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
-			$node->body[$node->language][0]['value'] = '<gcse:search linktarget="_parent"
-				queryParameterName="q_as">
-				</gcse:search>';
+			$node->field_page_body[$node->language][0]['value'] = '<?php print(\'<gcse:search linktarget="_parent" queryParameterName="q_as"></gcse:search>\') ?>';
 			$node = node_submit($node); 
 			node_save($node);
 			}
                 //content that will be displayed in block (i.e., the search box)
 		$content = <<<EOT
     
-                <!-- Put the following javascript before the closing </head> tag. -->
-  
-                <script>
-                (function() {
-                    var cx = '017536680796664338934:5pfh-ddinpm';
-                    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-                    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-                        '//www.google.com/cse/cse.js?cx=' + cx;
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-                })();
-                </script>
-                <!-- Place this tag where you want the search box to render -->
-                <gcse:searchbox-only></gcse:searchbox-only>
+               <style>
+.gsc-result-info-container, .gsc-result-info, .gsc-above-wrapper-area, .gsc-above-wrapper-area-container, form tbody, .gsc-search-button, .gsc-search-box, .gsc-clear-button, .gsc-input{
+border: 0;
+}
+ .region-header{
+width: 275px;
+}
+gsc-above-wrapper-area{
+padding: 5px;
+}
+</style>
+<!-- Put the following javascript before the closing </head> tag. -->
+   
+<script>
+  (function() {
+    var cx = '017536680796664338934:5pfh-ddinpm';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<!-- Place this tag where you want the search box to render -->
+<div style="clear:both;margin-left:-100px;padding-left:100px;">
+<gcse:searchbox-only  style="border:0!important;" linktarget="http://bryit.campuscms.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>
+</div>
 EOT;
 
 		//$content .= '<gcse:searchbox-only linktarget="http://bryit.campuscms.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>';
@@ -65,4 +76,3 @@ EOT;
 		
 	}
 }
-
