@@ -28,8 +28,8 @@ function gsearch_block_view($block_name = ''){
 			$node->path = array('alias' => 'gsearch_results'); 
 			node_object_prepare($node); 
 			$node->uid = 1; 
-			$node->body[$node->language][0]['format'] = 'php_code';
-			$node->body[$node->language][0]['summary'] = 'UC Merced Site Search';
+			$node->field_page_body[$node->language][0]['format'] = 'php_code';
+			$node->field_page_body[$node->language][0]['summary'] = 'UC Merced Site Search';
 			$node->field_page_body[$node->language][0]['value'] = '<?php print(\'<gcse:search linktarget="_parent" queryParameterName="q_as"></gcse:search>\') ?>';
 			$node = node_submit($node); 
 			node_save($node);
