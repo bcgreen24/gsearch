@@ -8,21 +8,21 @@ function gsearch_permission(){
       'administer gsearch settings' => array(
           'title' => t('Administer gSearch settings'),
       )  
-        
     );
 }
 
 function gsearch_help($path, $arg){
-	if($path == 'admin/help#gsearch'){
-		return t('Google search integration.');
-	}
+  if($path == 'admin/help#gsearch'){
+    return t('Google search integration.');
+  }
 }
+
 function gsearch_menu(){
     $items = array();
-    $items['admin/settings/gsearch'] = array(
+    $items['admin/config/gsearch'] = array(
       'title' => 'gSearch module settings',
       'page callback' => 'drupal_get_form',
-      'page arguments' => 'gsearch_admin',
+      'page arguments' => 'gsearch_form',
         'access arguments' => 'administer gsearch settings',
       'type' => MENU_NORMAL_ITEM,
     );
@@ -30,7 +30,7 @@ function gsearch_menu(){
     return $items;
 }
 
-function gsearch_admin(){
+function gsearch_form(){
     $form = array();
     
     $form['cse_key'] = array(
