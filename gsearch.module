@@ -82,11 +82,12 @@ EOT;
 			node_save($node);
 			}
                 //content that will be displayed in block (i.e., the search box)
-		$content = <<<EOT
+		$search_key = variable_get('cse_key');
+                        $content = <<<EOT
 
     	<script>
 			  (function() {
-			    var cx = '017536680796664338934:5pfh-ddinpm';
+			    var cx = '$search_key';
 			    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
 			    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
 			        '//www.google.com/cse/cse.js?cx=' + cx;
