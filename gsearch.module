@@ -1,7 +1,7 @@
 <?php
 //gsearch module for campuscms - version 1.0
 //author: Bryan green
-//revision: 1/16/2013
+//revision: 7/10/2013
 
 function gsearch_permission(){
     return array(
@@ -27,6 +27,14 @@ function gsearch_menu(){
       'type' => MENU_NORMAL_ITEM,
     );
     
+    $items['admin/config/gsearch/manage'] = array(
+      'title' => 'Manage module configuration',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => 'gsearch_form',
+        'access arguments' => 'administer gsearch settings',
+      'type' => MENU_NORMAL_ITEM,
+    );
+    
     return $items;
 }
 
@@ -38,7 +46,7 @@ function gsearch_form($form, &$form_state){
         '#required' => TRUE,
     );
 
-    return $form;
+    return system_settings_form($form);
 }
 
 function gsearch_block_info(){
