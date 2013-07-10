@@ -9,6 +9,19 @@ function gsearch_help($path, $arg){
 	}
 }
 
+function gsearch_admin(){
+    $form = array();
+    
+    $form['cse_key'] = array(
+      '#type' => 'textfield',
+        '#title' => t('Google Custom Search ID'),
+        '#size' => 32,
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
+}
+
 function gsearch_block_info(){
 	$blocks = array();
 	$blocks['google_integration'] = array(
