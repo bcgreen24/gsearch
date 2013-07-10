@@ -22,16 +22,16 @@ function gsearch_menu(){
     $items['admin/config/gsearch'] = array(
       'title' => 'gSearch module settings',
       'page callback' => 'drupal_get_form',
-      'page arguments' => 'gsearch_form',
-        'access arguments' => 'administer gsearch settings',
+      'page arguments' => array('gsearch_form'),
+        'access arguments' => array('administer gsearch settings'),
       'type' => MENU_NORMAL_ITEM,
     );
     
     $items['admin/config/gsearch/manage'] = array(
       'title' => 'Manage module configuration',
       'page callback' => 'drupal_get_form',
-      'page arguments' => 'gsearch_form',
-        'access arguments' => 'administer gsearch settings',
+      'page arguments' => array('gsearch_form'),
+        'access arguments' => array('administer gsearch settings'),
       'type' => MENU_NORMAL_ITEM,
     );
     
