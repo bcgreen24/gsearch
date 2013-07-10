@@ -86,16 +86,32 @@ EOT;
 		$search_key = variable_get('cse_key');
                         $content = <<<EOT
 
-    	<script>
-			  (function() {
-			    var cx = '$search_key';
-			    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-			    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-			        '//www.google.com/cse/cse.js?cx=' + cx;
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-			  })();
-			</script>
-        <form name="GoogleSearch" method="GET" action="/gsearch_results"><input type="text" name="q_as" /><input type="submit" /></form>
+<style>
+.gsc-result-info-container, .gsc-result-info, .gsc-above-wrapper-area, .gsc-above-wrapper-area-container, form tbody, .gsc-search-button, .gsc-search-box, .gsc-clear-button, .gsc-input{
+border: 0;
+}
+ .region-header{
+width: 275px;
+}
+gsc-above-wrapper-area{
+padding: 5px;
+}
+</style>
+<!-- Put the following javascript before the closing </head> tag. -->
+   
+<script>
+  (function() {
+    var cx = '$search_key';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<!-- Place this tag where you want the search box to render -->
+<div style="clear:both;margin-left:-100px;padding-left:100px;">
+<gcse:searchbox-only  style="border:0!important;" linktarget="http://it.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>
+</div>
         
 EOT;
 
