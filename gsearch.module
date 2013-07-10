@@ -3,6 +3,15 @@
 //author: Bryan green
 //revision: 1/16/2013
 
+function gsearch_permission(){
+    return array(
+      'administer gsearch settings' => array(
+          'title' => t('Administer gSearch settings'),
+      )  
+        
+    );
+}
+
 function gsearch_help($path, $arg){
 	if($path == 'admin/help#gsearch'){
 		return t('Google search integration.');
@@ -14,6 +23,7 @@ function gsearch_menu(){
       'title' => 'gSearch module settings',
       'page callback' => 'drupal_get_form',
       'page arguments' => 'gsearch_admin',
+        'access arguments' => 'administer gsearch settings',
       'type' => MENU_NORMAL_ITEM,
     );
     
