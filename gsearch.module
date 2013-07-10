@@ -30,9 +30,7 @@ function gsearch_menu(){
     return $items;
 }
 
-function gsearch_form(){
-    $form = array();
-    
+function gsearch_form($form, &$form_state){
     $form['cse_key'] = array(
       '#type' => 'textfield',
         '#title' => t('Google Custom Search ID'),
@@ -40,7 +38,7 @@ function gsearch_form(){
         '#required' => TRUE,
     );
 
-    return system_settings_form($form);
+    return $form;
 }
 
 function gsearch_block_info(){
