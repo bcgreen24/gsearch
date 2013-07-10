@@ -110,7 +110,7 @@ padding: 5px;
 </script>
 <!-- Place this tag where you want the search box to render -->
 <div style="clear:both;margin-left:-100px;padding-left:100px;">
-<gcse:searchbox-only  style="border:0!important;" linktarget="http://it.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>
+<gcse:searchbox-only  style="border:0!important;" linktarget="http://whatever.campuscms.ucmerced.edu/gsearch_results" queryParameterName="q_as"></gcse:searchbox-only>
 </div>
         
 EOT;
