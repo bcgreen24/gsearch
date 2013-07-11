@@ -62,7 +62,16 @@ function gsearch_block_info(){
 function gsearch_block_view($block_name = ''){
 	if ($block_name == 'google_integration'){
 		//NOTE: drupal_lookup_path is a D7 function; for D6, it would be node_valid_path
-		$path = drupal_lookup_path('source', 'gsearch_results');
+            //<meta name="google-site-verification" content="D-eEB5UOmhDACvJsH1vg2e8xw6KLhvxuQmfH6YIxJh4" />
+	$element = array(
+          '#tag' => 'meta',  
+          '#attributes' => array(
+            'name' => 'google-site-verification',
+              'content' => 'D-eEB5UOmhDACvJsH1vg2e8xw6KLhvxuQmfH6YIxJh4',
+          ),
+        );	
+            drupal_add_html_head($element);
+            $path = drupal_lookup_path('source', 'gsearch_results');
 		if(!$path){
                         //this create the search results page if it doesn't exist
 			$node = new stdClass(); 
@@ -86,7 +95,7 @@ EOT;
                 //content that will be displayed in block (i.e., the search box)
 		$search_key = variable_get('cse_key');
                         $content = <<<EOT
-<meta name="google-site-verification" content="D-eEB5UOmhDACvJsH1vg2e8xw6KLhvxuQmfH6YIxJh4" />
+
 <style>
 .gsc-result-info-container, .gsc-result-info, .gsc-above-wrapper-area, .gsc-above-wrapper-area-container, form tbody, .gsc-search-button, .gsc-search-box, .gsc-clear-button, .gsc-input{
 border: 0;
