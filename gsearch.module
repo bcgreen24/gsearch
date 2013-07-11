@@ -86,7 +86,7 @@ EOT;
                 //content that will be displayed in block (i.e., the search box)
 		$search_key = variable_get('cse_key');
                         $content = <<<EOT
-
+<meta name="google-site-verification" content="D-eEB5UOmhDACvJsH1vg2e8xw6KLhvxuQmfH6YIxJh4" />
 <style>
 .gsc-result-info-container, .gsc-result-info, .gsc-above-wrapper-area, .gsc-above-wrapper-area-container, form tbody, .gsc-search-button, .gsc-search-box, .gsc-clear-button, .gsc-input{
 border: 0;
