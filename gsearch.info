@@ -3,4 +3,3 @@ description = Google search integration
 package = bcgreen
 core = 7.x
 files[] = gsearch.module
-files[] = gsearch.js
